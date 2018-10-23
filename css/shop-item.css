@@ -1,0 +1,67 @@
+/*!
+ * Start Bootstrap - Shop Item (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licens7ed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.navbar-inverse{
+     background: rgba(0, 0, 0, 0) linear-gradient(to right, #00205b 100%, #ff671f 70%, #ff671f 100%) repeat scroll 0 0;
+    height: 100px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+
+    width: 100%;
+
+}
+.navbar-inverse.ribbon::after {
+    border-right-color: rgba(25, 103, 31, 0.8);
+    border-width: 0 40px 40px 0;
+    left: calc(51% - 40px);
+    top: 0;
+}
+.navbar-brand {
+  height: 50px;
+  padding: 15px 50px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.form-group {
+  margin-left:15px;
+}
+.row {
+  margin-top:25px;
+  margin-left:15px;
+}
+
+td, th {
+
+    padding: 5px;
+
+}
