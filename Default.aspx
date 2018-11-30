@@ -169,15 +169,24 @@
                 <asp:TableCell runat="server" ColumnSpan="6"><asp:TextBox ID="txtDesc" runat="server" Height="100px" TextMode="MultiLine" Width="975px"></asp:TextBox></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow runat="server">
-                <asp:TableCell runat="server" ColumnSpan="2" HorizontalAlign="Center">
+                <asp:TableCell runat="server" ColumnSpan="1" HorizontalAlign="Center">
                     <asp:Button ID="btnSearch" runat="server" Text="Search for Event" />
                 </asp:TableCell>
+                <asp:TableCell runat="server" ColumnSpan="1" HorizontalAlign="Center">
+                    <asp:Button ID="btnClear" runat="server" Text="Clear Screen" />
+                </asp:TableCell>
                 <asp:TableCell runat="server" ColumnSpan="2" HorizontalAlign="Center">
+                   
+                </asp:TableCell>
+                <asp:TableCell runat="server" ColumnSpan="1" HorizontalAlign="Center">
                     <asp:Button ID="btnUpdate" runat="server" Text="Update Selected Event" />
                 </asp:TableCell>
-                <asp:TableCell runat="server" ColumnSpan="2" HorizontalAlign="Center">
+                <asp:TableCell runat="server" ColumnSpan="1" HorizontalAlign="Center">
                     <asp:Button ID="btnAdd" runat="server" Text="New Event" />
                 </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                
             </asp:TableRow>
         </asp:Table>
         

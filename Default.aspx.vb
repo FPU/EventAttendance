@@ -135,6 +135,8 @@ Partial Class _Default
         Search = 1
     End Sub
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        lblMSG.Text = "label"
+        lblMSG.Visible = False
         Dim Count As Integer
         Count = Me.GridView1.Rows.Count
         If Me.txtName.Text = "" Then
@@ -224,6 +226,8 @@ Partial Class _Default
         Me.lblMSG.ForeColor = Drawing.Color.Black
         GridView1.SelectedIndex = -1
         Search = 0
+        lblMSG.Text = "Your event has been updated."
+        lblMSG.Visible = True
 
     End Sub
     Protected Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -292,6 +296,12 @@ Partial Class _Default
             Me.lblMSG.ForeColor = Drawing.Color.Red
             Exit Sub
         End Try
+
+        Me.SqlDataSource1.SelectCommand = "FPUEventsGetEventsByUsername"
+        SqlDataSource1.SelectParameters.Clear()
+        SqlDataSource1.SelectParameters.Add("Username", Request.ServerVariables("LOGON_USER"))
+        Me.SqlDataSource1.DataBind()
+        Me.GridView1.DataBind()
         If Count = Me.GridView1.Rows.Count Then
             Me.lblMSG.Text = "Your event could not be entered. This could be due to an event scheduled with the same name on the same day and time for your department already. Please verify your event information and try again."
             Me.lblMSG.Visible = True
@@ -299,11 +309,6 @@ Partial Class _Default
             Me.lblMSG.ForeColor = Drawing.Color.Red
             Exit Sub
         End If
-        Me.SqlDataSource1.SelectCommand = "FPUEventsGetEventsByUsername"
-        SqlDataSource1.SelectParameters.Clear()
-        SqlDataSource1.SelectParameters.Add("Username", Request.ServerVariables("LOGON_USER"))
-        Me.SqlDataSource1.DataBind()
-        Me.GridView1.DataBind()
         Me.txtName.Text = ""
         Me.txtStartDate.Text = ""
         Me.ddStartTime.SelectedIndex = 0
@@ -316,6 +321,8 @@ Partial Class _Default
         Me.lblMSG.ForeColor = Drawing.Color.Black
         GridView1.SelectedIndex = -1
         Search = 0
+        lblMSG.Text = "Your event has been added."
+        lblMSG.Visible = True
     End Sub
     Protected Sub GridView1_PageIndexChanged(sender As Object, e As EventArgs) Handles GridView1.PageIndexChanged
         If Search = 1 Then
@@ -368,5 +375,16 @@ Partial Class _Default
             Session.Add("Id", GridView1.SelectedDataKey(0).ToString)
             Response.Redirect("Attendance.aspx")
         End If
+    End Sub
+    Protected Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        Me.txtDesc.Text = ""
+        Me.txtEndDate.Text = ""
+        Me.txtName.Text = ""
+        Me.txtStartDate.Text = ""
+        Me.ddDept.SelectedIndex = -1
+        Me.ddEndTime.SelectedIndex = -1
+        Me.ddStartTime.SelectedIndex = -1
+        Me.lblMSG.Text = ""
+        Me.lblMSG.Visible = True
     End Sub
 End Class
