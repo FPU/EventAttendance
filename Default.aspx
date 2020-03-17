@@ -10,6 +10,7 @@
             <asp:ControlParameter Name="EndDate" ControlID="txtEndDate" PropertyName="Text" Type="String" />
             <asp:ControlParameter Name="EndTime" ControlID="ddEndTime" PropertyName="SelectedValue" Type="String" />
             <asp:ControlParameter Name="DepartmentId" ControlID="ddDept" PropertyName="SelectedValue" Type="String" />
+            <asp:ControlParameter Name="TermCode" ControlID="ddTerms" PropertyName="SelectedValue" Type="String" />
             <asp:Parameter Name="CreatedBy" />
         </InsertParameters>
         <SelectParameters>
@@ -25,15 +26,32 @@
             <asp:ControlParameter Name="EndTime" ControlID="ddEndTime" PropertyName="SelectedValue" Type="String" />
             <asp:ControlParameter Name="DepartmentId" ControlID="ddDept" PropertyName="SelectedValue" Type="String" />
             <asp:Parameter Name="UpdatedBy" />
+            <asp:ControlParameter ControlID="ddTerms" Name="Term" PropertyName="SelectedValue" />
         </UpdateParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:COLLEAGUE_ODS %>" SelectCommand="GetEventDepartmentsByUsername" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
         <asp:Label ID="lblMSG" runat="server" Text="Label"></asp:Label>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:COLLEAGUE_ODS %>" SelectCommand="GetEventAttendanceTerms" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+        
+        
+        <asp:HiddenField ID="hfDefaultTerm" runat="server" />
+        
+        
         <asp:Table ID="Table1" runat="server" HorizontalAlign="Center">
-
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server">
-                    <asp:Label ID="Label1" runat="server" Text="Event Name"></asp:Label></asp:TableCell>
+                    <asp:Label ID="Label8" runat="server" Text="Event Name"></asp:Label></asp:TableCell>
+                <asp:TableCell runat="server">
+                    <asp:Label ID="Label9" runat="server" Text="Term"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                    <asp:TableCell runat="server"><asp:TextBox ID="txtName" runat="server" Height="25px" Width="150px"></asp:TextBox></asp:TableCell>
+                <asp:TableCell runat="server">
+                    <asp:DropDownList ID="ddTerms" runat="server" DataSourceID="SqlDataSource3" DataTextField="record_ID" DataValueField="record_ID"></asp:DropDownList>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
                 <asp:TableCell runat="server">
                     <asp:Label ID="Label2" runat="server" Text="Start Date<br />(10/03/2018)"></asp:Label>
                 </asp:TableCell>
@@ -51,7 +69,6 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow runat="server">
-                <asp:TableCell runat="server"><asp:TextBox ID="txtName" runat="server" Height="25px" Width="150px"></asp:TextBox></asp:TableCell>
                 <asp:TableCell runat="server"><asp:TextBox ID="txtStartDate" runat="server" Height="25px" Width="150px"></asp:TextBox></asp:TableCell>
                 <asp:TableCell runat="server">
                     <asp:DropDownList ID="ddStartTime" runat="server">
@@ -192,7 +209,7 @@
         
         
         
-<asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" CellPadding="4" CellSpacing="5" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" DataKeyNames="EventId,EventName,Description,StartDate,EndDate,DepartmentId,StartTime,EndTime">
+<asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" CellPadding="4" CellSpacing="5" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" DataKeyNames="EventId,EventName,Description,StartDate,EndDate,DepartmentId,StartTime,EndTime,Term">
     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
     <Columns>
         <asp:CommandField ShowSelectButton="True" />

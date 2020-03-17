@@ -12,6 +12,7 @@ Partial Class _Default
         SqlDataSource2.SelectParameters.Clear()
         SqlDataSource2.SelectParameters.Add("Username", Request.ServerVariables("LOGON_USER"))
         SqlDataSource2.DataBind()
+
     End Sub
     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GridView1.SelectedIndexChanged
         If GridView1.SelectedDataKey(1).ToString <> "" Then
@@ -49,6 +50,11 @@ Partial Class _Default
         Else
             ddEndTime.SelectedIndex = 0
         End If
+        If GridView1.SelectedDataKey(8).ToString <> "" Then
+            ddTerms.SelectedValue = GridView1.SelectedDataKey(8).ToString
+        Else
+            ddTerms.SelectedIndex = 0
+        End If
 
     End Sub
 
@@ -72,7 +78,7 @@ Partial Class _Default
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Me.SqlDataSource1.SelectParameters.Clear()
         Me.SqlDataSource1.SelectCommand = "FPUEventsSearch"
-        Dim Username, Name, Desc, StartDate, StartTime, EndDate, EndTime, Dept As String
+        Dim Username, Name, Desc, StartDate, StartTime, EndDate, EndTime, Dept, Term As String
         SqlDataSource1.SelectParameters.Clear()
         SqlDataSource1.SelectParameters.Add("Username", Request.ServerVariables("LOGON_USER"))
         Username = Request.ServerVariables("LOGON_USER")
@@ -125,6 +131,8 @@ Partial Class _Default
             SqlDataSource1.SelectParameters.Add("DepartmentId", "None")
             Dept = "None"
         End If
+        SqlDataSource1.SelectParameters.Add("Term", ddTerms.SelectedValue)
+        Term = ddTerms.SelectedValue
         Try
             SqlDataSource1.DataBind()
         Catch ex As Exception
@@ -220,6 +228,7 @@ Partial Class _Default
         Me.txtEndDate.Text = ""
         Me.ddEndTime.SelectedIndex = 0
         Me.ddDept.SelectedIndex = 0
+        Me.ddTerms.SelectedIndex = 0
         Me.txtDesc.Text = ""
         lblMSG.Visible = False
         Me.lblMSG.Font.Bold = False
@@ -316,6 +325,7 @@ Partial Class _Default
         Me.ddEndTime.SelectedIndex = 0
         Me.ddDept.SelectedIndex = 0
         Me.txtDesc.Text = ""
+        Me.ddTerms.SelectedIndex = 0
         lblMSG.Visible = False
         Me.lblMSG.Font.Bold = False
         Me.lblMSG.ForeColor = Drawing.Color.Black
@@ -337,6 +347,7 @@ Partial Class _Default
             SqlDataSource1.SelectParameters.Add("EndDate", txtEndDate.Text)
             SqlDataSource1.SelectParameters.Add("EndTime", ddEndTime.SelectedValue)
             SqlDataSource1.SelectParameters.Add("DepartmentId", ddDept.SelectedValue)
+            SqlDataSource1.SelectParameters.Add("Term", ddTerms.SelectedValue)
             SqlDataSource1.DataBind()
             GridView1.DataBind()
             GridView1.SelectedIndex = -1
@@ -355,6 +366,7 @@ Partial Class _Default
             SqlDataSource1.SelectParameters.Add("EndDate", txtEndDate.Text)
             SqlDataSource1.SelectParameters.Add("EndTime", ddEndTime.SelectedValue)
             SqlDataSource1.SelectParameters.Add("DepartmentId", ddDept.SelectedValue)
+            SqlDataSource1.SelectParameters.Add("Term", ddTerms.SelectedValue)
             SqlDataSource1.DataBind()
             GridView1.DataBind()
             GridView1.SelectedIndex = -1
@@ -384,7 +396,12 @@ Partial Class _Default
         Me.ddDept.SelectedIndex = -1
         Me.ddEndTime.SelectedIndex = -1
         Me.ddStartTime.SelectedIndex = -1
+        Me.ddTerms.SelectedIndex = 0
         Me.lblMSG.Text = ""
         Me.lblMSG.Visible = True
+    End Sub
+
+    Private Sub ddTerms_DataBound(sender As Object, e As EventArgs) Handles ddTerms.DataBound
+        ddTerms.SelectedIndex = 0
     End Sub
 End Class
